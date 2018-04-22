@@ -55,5 +55,27 @@ var Table = require('cli-table');
   
     return
   }
+
+  getProduct = async function(productId){
+  
+  
+    productQuery = `
+      select p.productId, p.productName, p.price, p.stock
+      from product p
+      where p.productId = ?
+    `;
+  
+    let product = await query(productQuery, [productId]);
+  
+    return {
+      id: product[0].productId,
+      name: product[0].productName,
+      price: product[0].price,
+      stock: product[0].stock
+    }
+}
+getProduct(1).then(function(row){
+console.log(row);
+});
   
   
